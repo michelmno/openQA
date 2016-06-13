@@ -873,7 +873,7 @@ sub store_image {
     my ($storepath, $thumbpath) = OpenQA::Utils::image_md5_filename($md5);
     $storepath = $thumbpath if ($thumb);
     my $prefixdir = dirname($storepath);
-    mkdir($prefixdir) unless (-d $prefixdir);
+    File::Path::make_path($prefixdir);
     $asset->move_to($storepath);
 
     $OpenQA::Utils::app->gru->enqueue(optipng => $storepath);
