@@ -219,6 +219,7 @@ sub _workers_checker {
 
     Mojo::IOLoop->timer(
         10 => sub {
+            log_warning("calling dead worker code");
             my $dead_jobs = _get_dead_worker_jobs($threshold);
             my $ipc       = OpenQA::IPC->ipc;
             for my $job ($dead_jobs->all) {
